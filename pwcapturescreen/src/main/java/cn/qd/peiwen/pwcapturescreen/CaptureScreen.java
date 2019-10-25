@@ -38,6 +38,7 @@ public class CaptureScreen {
     private boolean busy = false;
     private boolean ready = false;
     private String filePath = null;
+    private String fileName = null;
     private ImageReader imageReader = null;
     private ICaptureListener listener = null;
     private HandlerThread handlerThread = null;
@@ -118,6 +119,7 @@ public class CaptureScreen {
     private void beginCapture() {
         if (CaptureScreen.this.createMediaProjection()) {
             this.busy = true;
+            this.fileName = "" + System.currentTimeMillis() + ".png";
             CaptureScreen.this.createImageReader();
             CaptureScreen.this.createVirtualDisplay();
         } else {
@@ -144,7 +146,7 @@ public class CaptureScreen {
     }
 
     private String filePath() {
-        return this.filePath + File.separator + System.currentTimeMillis() + ".png";
+        return this.filePath + File.separator + this.fileName;
     }
 
     private void createImageReader() {
