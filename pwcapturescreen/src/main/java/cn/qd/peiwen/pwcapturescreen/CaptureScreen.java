@@ -76,7 +76,10 @@ public class CaptureScreen {
     }
 
     public void captureScreen() {
-        this.captureHandler.sendEmptyMessage(0);
+        if (!this.busy) {
+            this.busy = true;
+            this.captureHandler.sendEmptyMessage(0);
+        }
     }
 
     public void createHandler() {
@@ -118,7 +121,6 @@ public class CaptureScreen {
 
     private void beginCapture() {
         if (CaptureScreen.this.createMediaProjection()) {
-            this.busy = true;
             this.fileName = "" + System.currentTimeMillis() + ".png";
             CaptureScreen.this.createImageReader();
             CaptureScreen.this.createVirtualDisplay();
