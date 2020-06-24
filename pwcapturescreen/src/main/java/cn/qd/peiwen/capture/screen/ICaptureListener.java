@@ -1,4 +1,4 @@
-package cn.qd.peiwen.pwcapturescreen;
+package cn.qd.peiwen.capture.screen;
 
 public interface ICaptureListener {
     void onCaptureFailed();

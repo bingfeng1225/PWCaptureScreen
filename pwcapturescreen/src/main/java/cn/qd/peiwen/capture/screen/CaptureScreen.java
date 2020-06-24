@@ -1,4 +1,4 @@
-package cn.qd.peiwen.pwcapturescreen;
+package cn.qd.peiwen.capture.screen;
 
 import android.content.Context;
 import android.content.Intent;
