@@ -23,9 +23,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import cn.qd.peiwen.pwtools.EmptyUtils;
-import cn.qd.peiwen.pwtools.FileUtils;
-
 import static android.app.Activity.RESULT_OK;
 
 public class CaptureScreen {
@@ -109,7 +106,7 @@ public class CaptureScreen {
     }
 
     public boolean capturePermissionResponsed(int result, Intent intent) {
-        if (result != RESULT_OK || EmptyUtils.isEmpty(intent)) {
+        if (result != RESULT_OK || intent == null) {
             this.ready = false;
         } else {
             this.ready = true;
@@ -126,7 +123,7 @@ public class CaptureScreen {
             CaptureScreen.this.createVirtualDisplay();
         } else {
             this.busy = false;
-            if (EmptyUtils.isNotEmpty(this.listener)) {
+            if (null != this.listener) {
                 this.listener.onCaptureFailed();
             }
         }
@@ -166,7 +163,7 @@ public class CaptureScreen {
 
     private boolean createMediaProjection() {
         mediaProjection = projectionManager.getMediaProjection(this.result, this.intent);
-        if (EmptyUtils.isEmpty(mediaProjection)) {
+        if (mediaProjection == null) {
             return false;
         }
         this.mediaProjection.registerCallback(projectionCallback, this.captureHandler);
@@ -197,12 +194,12 @@ public class CaptureScreen {
                 }
                 case 1: {
                     String filepath = filePath();
-                    if (!FileUtils.isFileExist(filepath)) {
-                        if (EmptyUtils.isNotEmpty(listener)) {
+                    if (!new File(filepath).exists()) {
+                        if (null != listener) {
                             listener.onCaptureFailed();
                         }
                     } else {
-                        if (EmptyUtils.isNotEmpty(listener)) {
+                        if (null != listener) {
                             listener.onCaptureSuccessed(filepath);
                         }
                     }
